@@ -1,0 +1,10 @@
+create table history_new as select * from history limit 1 ;
+create table history_uint_new as select * from history_uint limit 10 ;
+alter table history_uint rename to history_uint_old ;
+alter table history rename to history_old ;
+alter table history_uint_new rename to history_uint ;
+alter table history_new rename to history ;
+CREATE index history_itemid_clock_ns on history (itemid,clock,ns);
+create index history_uint_2 on history_uint (itemid, clock, ns);
+drop table history_uint_old;
+drop table history_old;
